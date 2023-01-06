@@ -1,6 +1,7 @@
 import path from 'node:path';
 import { BrowserWindow, app, ipcMain } from 'electron';
 import axiosBase from 'axios';
+import { ApiResponse } from './web/types';
 
 app.whenReady().then(() => {
   // アプリの起動イベント発火で BrowserWindow インスタンスを作成
@@ -22,7 +23,7 @@ const axios = axiosBase.create({
 });
 
 const fetchCurrentWeather = async () => {
-  const response = await axios.get('/weather', {
+  const response = await axios.get<ApiResponse.GetWeather>('/weather', {
     params: {
       lat: 35.681236,
       lon: 139.767125,
@@ -31,10 +32,24 @@ const fetchCurrentWeather = async () => {
       appid: process.env.REACT_APP_WEATHER_API_KEY,
     },
   });
-  return response.data.name;
+  return response.data;
 };
 
-ipcMain.handle('fetch', fetchCurrentWeather);
+const fetchForecastList = async () => {
+  const response = await axios.get<ApiResponse.GetForecastList>('/forecast', {
+    params: {
+      lat: 35.681236,
+      lon: 139.767125,
+      units: 'metric',
+      lang: 'jp',
+      appid: process.env.REACT_APP_WEATHER_API_KEY,
+    },
+  });
+  return response.data;
+};
+
+ipcMain.handle('current-weather', fetchCurrentWeather);
+ipcMain.handle('forecast', fetchForecastList);
 
 // すべてのウィンドウが閉じられたらアプリを終了する
 app.once('window-all-closed', () => app.quit());
