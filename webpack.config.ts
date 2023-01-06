@@ -31,15 +31,6 @@ const common: Configuration = {
     // ファイル種別ごとのコンパイル & バンドルのルール
     rules: [
       {
-        // コンパイルの事前に eslint による
-        // 拡張子 .ts または .tsx の場合
-        test: /\.tsx?$/,
-        // 事前処理であることを示す
-        enforce: 'pre',
-        // TypeScript をコードチェックする
-        loader: 'eslint-loader',
-      },
-      {
         /**
          * 拡張子 '.ts' または '.tsx' （正規表現）のファイルを 'ts-loader' で処理
          * ただし node_modules ディレクトリは除外する
