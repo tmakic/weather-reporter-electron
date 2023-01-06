@@ -1,9 +1,9 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 
 interface ElectronWindow extends Window {
   weather: {
-    fetchCurrentWeather: () => Promise<any>;
+    fetchCurrentWeather: () => Promise<any>; // TODO: any回避
   };
 }
 
@@ -16,12 +16,12 @@ export const App = () => {
     window.weather.fetchCurrentWeather().then(response => {
       setWeather(JSON.stringify(response))
     })
-  },[])
+  }, [])
 
   return (
     <div className="container">
       <h1>Hello.</h1>
-      <p>{ weather }</p>
+      <p>{weather}</p>
     </div>
   );
 };

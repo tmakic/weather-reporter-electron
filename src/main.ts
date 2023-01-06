@@ -1,6 +1,6 @@
 import path from 'node:path';
 import { BrowserWindow, app, ipcMain } from 'electron';
-import axiosBase from "axios";
+import axiosBase from 'axios';
 
 app.whenReady().then(() => {
   // アプリの起動イベント発火で BrowserWindow インスタンスを作成
@@ -14,25 +14,25 @@ app.whenReady().then(() => {
   // レンダラープロセスをロード
   mainWindow.loadFile('dist/index.html');
 
-  mainWindow.webContents.openDevTools()
+  mainWindow.webContents.openDevTools();
 });
 
 const axios = axiosBase.create({
-  baseURL: process.env.REACT_APP_WEATHER_API_BASE_URL
+  baseURL: process.env.REACT_APP_WEATHER_API_BASE_URL,
 });
 
 const fetchCurrentWeather = async () => {
-  const response = await axios.get("/weather", {
+  const response = await axios.get('/weather', {
     params: {
       lat: 35.681236,
       lon: 139.767125,
-      units: "metric",
-      lang: "jp",
-      appid: process.env.REACT_APP_WEATHER_API_KEY
-    }
-  })
-  return response.data.name
-}
+      units: 'metric',
+      lang: 'jp',
+      appid: process.env.REACT_APP_WEATHER_API_KEY,
+    },
+  });
+  return response.data.name;
+};
 
 ipcMain.handle('fetch', fetchCurrentWeather);
 
