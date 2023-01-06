@@ -7,8 +7,8 @@ import { roundNum } from './utils/NumberUtils';
 
 interface ElectronWindow extends Window {
   weather: {
-    fetchCurrentWeather: () => Promise<ApiResponse.GetWeather>; // TODO: any回避
-    fetchForecastList: () => Promise<ApiResponse.GetForecastList>; // TODO: any回避
+    fetchCurrentWeather: () => Promise<ApiResponse.GetWeather>;
+    fetchForecastList: () => Promise<ApiResponse.GetForecastList>;
   };
 }
 
