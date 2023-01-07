@@ -41,10 +41,10 @@ const common: Configuration = {
       },
       {
         // 拡張子 '.css' （正規表現）のファイル
-        test: /\.css$/,
+        test: /\.(css|sass|scss)$/,
         // use 配列に指定したローダーは *最後尾から* 順に適用される
         // セキュリティ対策のため style-loader は使用しない
-        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
       },
       {
         // 画像やフォントなどのアセット類
