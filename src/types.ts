@@ -29,6 +29,9 @@ export interface Coord {
   lon: number;
 }
 
+export type CurrentWeatherContextValue = CurrentWeather | undefined;
+export type ForecastContextValue = DisplayForecast[] | undefined;
+
 export namespace ApiResponse {
   export interface Forecast {
     dt: number;

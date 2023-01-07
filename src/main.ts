@@ -1,7 +1,7 @@
 import path from 'node:path';
 import { BrowserWindow, app, ipcMain } from 'electron';
 import axiosBase from 'axios';
-import { ApiResponse } from './web/types';
+import { ApiResponse } from './types';
 
 app.whenReady().then(() => {
   // アプリの起動イベント発火で BrowserWindow インスタンスを作成
