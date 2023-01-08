@@ -14,8 +14,8 @@
   }
   &__Content {
     &__Num {
-      font-size: 44px;
-      line-height: 1.2;
+      font-size: 40px;
+      line-height: 1;
       margin-left: 20px;
       font-weight: bold;
     }
@@ -28,6 +28,6 @@
     }
   }
   &:nth-child(n + 2) {
-    margin-top: 4px;
+    margin-top: 16px;
   }
 }

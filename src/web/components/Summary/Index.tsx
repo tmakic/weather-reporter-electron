@@ -3,6 +3,7 @@ import { CurrentWeatherContext } from '../../contexts/currentWeatherContext';
 import { roundNum } from '../../utils/NumberUtils';
 import { tempTypeLabel } from '../../utils/WeatherUtils';
 import { StatisticsPanel } from '../StatisticsPanel';
+import { WeatherIcon } from '../WeatherIcon';
 
 import './Summary.scss';
 
@@ -11,6 +12,11 @@ export const Summary = () => {
   return (
     <div className="Summary">
       <div className="Summary__CurrentWeather">
+        {currentWeather?.weather.icon && (
+          <div className="Summary__CurrentWeather__IconWrapper">
+            <WeatherIcon icon={currentWeather?.weather.icon} alt="WeatherIcon" width="280px" />
+          </div>
+        )}
         {currentWeather?.temp && (
           <div className="Summary__CurrentWeather__Temp">
             <span className="Summary__CurrentWeather__Temp__Num">{roundNum(currentWeather?.temp)}</span>

@@ -14,8 +14,6 @@ app.whenReady().then(() => {
 
   // レンダラープロセスをロード
   mainWindow.loadFile('dist/index.html');
-
-  mainWindow.webContents.openDevTools();
 });
 
 const axios = axiosBase.create({
