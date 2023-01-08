@@ -10,6 +10,7 @@ app.whenReady().then(() => {
       // webpack が出力したプリロードスクリプトを読み込み
       preload: path.join(__dirname, 'preload.js'),
     },
+    icon: path.join(__dirname, '../icon/weather.png'),
   });
 
   mainWindow.webContents.openDevTools();
