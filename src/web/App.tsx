@@ -5,7 +5,8 @@ import { CurrentWeatherProvider } from './components/Providers/CurrentWeatherPro
 import { ForecastProvider } from './components/Providers/ForecastProvider';
 
 import { WeatherInfo } from './components/WeatherInfo';
-import { Date } from './components/Date/Index';
+import { Date } from './components/Date';
+import { Summary } from './components/Summary';
 import { Chart } from './components/Chart';
 
 export const App = () => {
@@ -13,6 +14,7 @@ export const App = () => {
     <div className="container">
       <CurrentWeatherProvider>
         <Date />
+        <Summary />
         <WeatherInfo />
       </CurrentWeatherProvider>
       <ForecastProvider>

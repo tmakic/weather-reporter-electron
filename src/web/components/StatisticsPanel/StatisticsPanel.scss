@@ -1,0 +1,33 @@
+.StatisticsPanel {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  border-bottom: 2px solid;
+  &--max {
+    border-color: #e96e50;
+  }
+  &--min {
+    border-color: #78cbbf;
+  }
+  &__Title {
+    font-size: 18px;
+  }
+  &__Content {
+    &__Num {
+      font-size: 44px;
+      line-height: 1.2;
+      margin-left: 20px;
+      font-weight: bold;
+    }
+    &__Unit {
+      font-size: 20px;
+      margin-left: 4px;
+    }
+    &__ClothSearch {
+      padding: 3px;
+    }
+  }
+  &:nth-child(n + 2) {
+    margin-top: 4px;
+  }
+}
