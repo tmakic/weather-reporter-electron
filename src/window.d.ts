@@ -1,10 +1,10 @@
-import { ApiResponse } from './types';
+import { ApiResponse, Coord } from './types';
 
 declare global {
   interface Window {
     weather: {
-      fetchCurrentWeather: () => Promise<ApiResponse.GetWeather>;
-      fetchForecastList: () => Promise<ApiResponse.GetForecastList>;
+      fetchCurrentWeather: (coord: Coord | undefined) => Promise<ApiResponse.GetWeather>;
+      fetchForecastList: (coord: Coord | undefined) => Promise<ApiResponse.GetForecastList>;
     };
   }
 }

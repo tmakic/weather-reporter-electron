@@ -1,7 +1,7 @@
 import path from 'node:path';
 import { BrowserWindow, app, ipcMain } from 'electron';
 import axiosBase from 'axios';
-import { ApiResponse } from './types';
+import { ApiResponse, Coord } from './types';
 
 app.whenReady().then(() => {
   // アプリの起動イベント発火で BrowserWindow インスタンスを作成
@@ -12,6 +12,8 @@ app.whenReady().then(() => {
     },
   });
 
+  mainWindow.webContents.openDevTools();
+
   // レンダラープロセスをロード
   mainWindow.loadFile('dist/index.html');
 });
@@ -20,11 +22,13 @@ const axios = axiosBase.create({
   baseURL: process.env.REACT_APP_WEATHER_API_BASE_URL,
 });
 
-const fetchCurrentWeather = async () => {
+const fetchCurrentWeather = async (coord: Coord) => {
+  debugger; // eslint-disable-line no-debugger
+  if (!coord || !coord.lat || !coord.lon) return;
   const response = await axios.get<ApiResponse.GetWeather>('/weather', {
     params: {
-      lat: 35.681236,
-      lon: 139.767125,
+      lat: coord.lat,
+      lon: coord.lon,
       units: 'metric',
       lang: 'jp',
       appid: process.env.REACT_APP_WEATHER_API_KEY,
@@ -33,11 +37,12 @@ const fetchCurrentWeather = async () => {
   return response.data;
 };
 
-const fetchForecastList = async () => {
+const fetchForecastList = async (coord: Coord) => {
+  if (!coord || !coord.lat || !coord.lon) return;
   const response = await axios.get<ApiResponse.GetForecastList>('/forecast', {
     params: {
-      lat: 35.681236,
-      lon: 139.767125,
+      lat: coord.lat,
+      lon: coord.lon,
       units: 'metric',
       lang: 'jp',
       appid: process.env.REACT_APP_WEATHER_API_KEY,
@@ -46,8 +51,12 @@ const fetchForecastList = async () => {
   return response.data;
 };
 
-ipcMain.handle('current-weather', fetchCurrentWeather);
-ipcMain.handle('forecast', fetchForecastList);
+ipcMain.handle('current-weather', async (_event, coord) => {
+  return fetchCurrentWeather(coord);
+});
+ipcMain.handle('forecast', async (_event, coord) => {
+  return fetchForecastList(coord);
+});
 
 // すべてのウィンドウが閉じられたらアプリを終了する
 app.once('window-all-closed', () => app.quit());

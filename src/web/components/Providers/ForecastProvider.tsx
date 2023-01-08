@@ -1,14 +1,18 @@
 import React, { ReactNode, useEffect, useState } from 'react';
+
 import { ForecastContext } from '../../contexts/forcastContext';
 
 import { ApiResponse, DisplayForecast } from '../../../types';
 import { formatDate } from '../../utils/DateUtils';
 import { roundNum } from '../../utils/NumberUtils';
+import { useGeolocation } from '../../hooks/useGeolocation';
 
 export const ForecastProvider = (props: { children: ReactNode }) => {
   const [forecastList, setForecastList] = useState<DisplayForecast[]>();
+  const { coord } = useGeolocation();
   useEffect(() => {
-    window.weather.fetchForecastList().then((data) => {
+    window.weather.fetchForecastList(coord).then((data) => {
+      if (!data) return;
       const newForecasList = data.list.slice(0, 9).map((forecast: ApiResponse.Forecast) => {
         return {
           datetime: formatDate(forecast.dt, 'h:mm'),
@@ -22,6 +26,6 @@ export const ForecastProvider = (props: { children: ReactNode }) => {
       });
       setForecastList(newForecasList);
     });
-  }, []);
+  }, [coord]);
   return <ForecastContext.Provider value={forecastList}>{props.children}</ForecastContext.Provider>;
 };
