@@ -13,8 +13,6 @@ app.whenReady().then(() => {
     icon: path.join(__dirname, '../icon/weather.png'),
   });
 
-  mainWindow.webContents.openDevTools();
-
   // レンダラープロセスをロード
   mainWindow.loadFile('dist/index.html');
 });

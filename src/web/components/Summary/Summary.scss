@@ -1,6 +1,6 @@
 .Summary {
-  width: 880px;
-  padding: 0 40px 0 0;
+  width: 100%;
+  padding: 0 20px;
   display: flex;
   justify-content: space-between;
   &__CurrentWeather {
@@ -27,5 +27,20 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+  }
+}
+
+@media screen and (max-width: 680px) {
+  .Summary {
+    flex-direction: column;
+    &__Statistics {
+      flex-direction: row;
+      > * {
+        width: 50%;
+      }
+      > *:nth-child(n + 2) {
+        margin-left: 32px;
+      }
+    }
   }
 }

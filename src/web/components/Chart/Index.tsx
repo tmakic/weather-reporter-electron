@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { AreaChart, Area, LabelList, XAxis } from 'recharts';
+import { AreaChart, Area, LabelList, XAxis, ResponsiveContainer } from 'recharts';
 import { ForecastContext } from '../../contexts/forcastContext';
 import { XAxisTick } from './XAxisTick';
 import { LabelContent } from './LabelContent';
@@ -9,11 +9,9 @@ import './Chart.scss';
 export const Chart = () => {
   const forecastList = useContext(ForecastContext);
   return (
-    <div>
+    <ResponsiveContainer width="100%" height={300}>
       <AreaChart
         className="AreaChart"
-        width={880}
-        height={300}
         data={forecastList}
         margin={{
           top: 20,
@@ -41,6 +39,6 @@ export const Chart = () => {
           <LabelList dataKey="temp" position="top" content={LabelContent} />
         </Area>
       </AreaChart>
-    </div>
+    </ResponsiveContainer>
   );
 };
